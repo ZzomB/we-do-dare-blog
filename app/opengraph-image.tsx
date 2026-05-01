@@ -32,7 +32,7 @@ export default function OgImage() {
             fontWeight: 'bold',
           }}
         >
-          I Do Dare
+          WeDoDare
         </div>
         <div
           style={{

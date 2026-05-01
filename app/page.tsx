@@ -10,10 +10,10 @@ import { getPublishedPosts } from '@/lib/notion';
 import type { Metadata } from 'next';
 
 export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.idodareblog.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.wedodare.com';
   
   return {
-    title: 'I do dare',
+    title: 'WeDoDare',
     description: '나를 이루는 작은 도전들 - 여행, 의료, 음악 등 다양한 분야의 도전과 경험들을 공유하는 블로그',
     keywords: ['challenges', 'dare', 'travel', 'medical', 'disease', 'sing', 'vocal', '블로그', '도전', '여행', '의료'],
     authors: [{ name: 'Joo', url: 'https://github.com/ZzomB' }],
@@ -23,10 +23,10 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: '/',
     },
     openGraph: {
-      title: 'I do dare - 나를 이루는 작은 도전들',
+      title: 'WeDoDare - 나를 이루는 작은 도전들',
       description: '나를 이루는 작은 도전들 - 여행, 의료, 음악 등 다양한 분야의 도전과 경험을 공유하는 블로그',
       url: baseUrl,
-      siteName: 'I do dare',
+      siteName: 'WeDoDare',
       type: 'website',
       locale: 'ko_KR',
       images: [
@@ -34,13 +34,13 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${baseUrl}/opengraph-image`,
           width: 1200,
           height: 630,
-          alt: 'I do dare',
+          alt: 'WeDoDare',
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'I do dare - 나를 이루는 작은 도전들',
+      title: 'WeDoDare - 나를 이루는 작은 도전들',
       description: '나를 이루는 작은 도전들 - 여행, 의료, 음악 등 다양한 분야의 도전과 경험을 공유하는 블로그',
       images: [`${baseUrl}/opengraph-image`],
     },
@@ -71,13 +71,13 @@ export default async function Home({ searchParams }: HomeProps) {
   const tags = getTagList();
   const postsPromise = getPublishedPosts({ tag: selectedTag, sort: selectedSort });
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.idodareblog.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.wedodare.com';
   
   // 구조화된 데이터 (Schema.org JSON-LD) - 블로그 사이트임을 명확히 표시
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'I do dare',
+    name: 'WeDoDare',
     description: '나를 이루는 작은 도전들 - 여행, 의료, 음악 등 다양한 분야의 도전과 경험을 공유하는 블로그',
     url: baseUrl,
     author: {
@@ -87,7 +87,7 @@ export default async function Home({ searchParams }: HomeProps) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'I do dare',
+      name: 'WeDoDare',
       url: baseUrl,
     },
     inLanguage: 'ko-KR',

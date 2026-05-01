@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | I do dare',
-    default: 'I do dare',
+    template: '%s | WeDoDare',
+    default: 'WeDoDare',
   },
   description: '나를 이루는 작은 도전들',
   keywords: ['challenges', 'dare', 'travel', 'medical', 'disease', 'sing', 'vocal'],
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
-    siteName: 'I do dare',
+    siteName: 'WeDoDare',
   },
   robots: {
     index: true,

@@ -37,9 +37,9 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.idodareblog.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.wedodare.com';
   const postUrl = `${baseUrl}/blog/${slug}`;
-  const description = post.description || `${post.title} - I do dare`;
+  const description = post.description || `${post.title} - WeDoDare`;
 
   const ogImageUrl = post.coverImage
     ? post.coverImage
@@ -75,7 +75,7 @@ export async function generateMetadata({
       title: post.title,
       description,
       url: postUrl,
-      siteName: 'I do dare',
+      siteName: 'WeDoDare',
       type: 'article',
       locale: 'ko_KR',
       publishedTime: post.date,
@@ -154,13 +154,13 @@ export default async function BlogPost({ params }: BlogPostProps) {
   }
 
   // 구조화된 데이터 (Schema.org JSON-LD)
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.idodareblog.com';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.wedodare.com';
   const postUrl = `${baseUrl}/blog/${slug}`;
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
-    description: post.description || `${post.title} - I do dare`,
+    description: post.description || `${post.title} - WeDoDare`,
     image: post.coverImage ? [post.coverImage] : [],
     datePublished: post.date,
     dateModified: post.modifiedDate || post.date,
@@ -170,7 +170,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'I do dare',
+      name: 'WeDoDare',
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/opengraph-image`,

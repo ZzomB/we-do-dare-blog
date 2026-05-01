@@ -65,7 +65,7 @@ export async function GET(
               marginBottom: 20,
             }}
           >
-            I do dare
+            WeDoDare
           </div>
           <div
             style={{
