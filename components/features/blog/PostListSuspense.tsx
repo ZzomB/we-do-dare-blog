@@ -31,7 +31,6 @@ export default function PostList({ postsPromise }: PostListProps) {
     if (sort) params.set('sort', sort);
     if (pageParam) params.set('startCursor', pageParam);
     params.set('pageSize', pageSize.toString());
-    // 페이지당 2개씩
 
     const response = await fetch(`/api/posts?${params.toString()}`);
     if (!response.ok) {
