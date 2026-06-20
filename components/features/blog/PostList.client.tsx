@@ -21,7 +21,7 @@ export default function PostList() {
     <div className="grid gap-4">
       {posts.length > 0 ? (
         posts.map((post, index) => (
-          <Link href={`/blog/${post.slug}`} key={post.id}>
+          <Link href={`/${post.slug}`} key={post.id}>
             <PostCard key={post.id} post={post} />
           </Link>
         ))

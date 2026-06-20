@@ -2,6 +2,8 @@
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+import profileLight from '@/public/images/profile-medical-light.png';
+import profileDark from '@/public/images/profile-medical-dark.png';
 
 export default function ProfileImage() {
   const { theme } = useTheme();
@@ -15,7 +17,7 @@ export default function ProfileImage() {
   if (!mounted) {
     return (
       <Image
-        src="/images/profile-medical-light.png"
+        src={profileLight}
         alt="cat"
         width={144}
         height={144}
@@ -26,9 +28,7 @@ export default function ProfileImage() {
 
   return (
     <Image
-      src={
-        theme === 'light' ? '/images/profile-medical-light.png' : '/images/profile-medical-dark.png'
-      }
+      src={theme === 'light' ? profileLight : profileDark}
       alt="cat"
       width={144}
       height={144}

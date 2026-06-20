@@ -80,7 +80,7 @@ export default function PostList({ postsPromise }: PostListProps) {
 
   // 경로가 변경되면 로딩 상태 해제
   useEffect(() => {
-    if (pathname?.startsWith('/blog/')) {
+    if (pathname && pathname !== '/') {
       setLoadingSlug(null);
     }
   }, [pathname]);
@@ -91,7 +91,7 @@ export default function PostList({ postsPromise }: PostListProps) {
         {allPosts.length > 0 ? (
           allPosts.map((post, index) => (
             <Link
-              href={`/blog/${post.slug}`}
+              href={`/${post.slug}`}
               key={post.id}
               onClick={() => handleLinkClick(post.slug)}
               className={`relative block ${

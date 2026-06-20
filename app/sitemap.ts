@@ -25,22 +25,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 정적 페이지 목록
   const staticPages = [
     {
-      url: cleanBaseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 1,
-    },
-    {
-      url: `${cleanBaseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
       url: `${cleanBaseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
-      priority: 0.9,
+      priority: 1.0,
+    },
+    {
+      url: `${cleanBaseUrl}/blog/about`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
     },
   ];
 

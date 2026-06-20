@@ -33,9 +33,6 @@ export default function Header() {
               </a>
             </div>
             <ThemeToggle />
-            {/* <Button asChild size="sm" className="gap-2">
-              <Link href="/blog/write">글쓰기</Link>
-            </Button> */}
           </div>
         </div>
       </div>
