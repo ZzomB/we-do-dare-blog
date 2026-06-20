@@ -2,6 +2,16 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   basePath: '/blog',
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/blog',
+        basePath: false,
+        permanent: true,
+      },
+    ];
+  },
   /* config options here */
   images: {
     remotePatterns: [
