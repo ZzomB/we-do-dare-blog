@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
     creator: 'Joo',
     publisher: 'Joo',
     alternates: {
-      canonical: '/',
+      canonical: '/blog',
     },
     openGraph: {
       title: 'WeDoDare - 나를 이루는 작은 도전들',

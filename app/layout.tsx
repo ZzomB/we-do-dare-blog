@@ -32,9 +32,6 @@ export const metadata: Metadata = {
     address: false,
   },
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wedodare.com'),
-  alternates: {
-    canonical: '/',
-  },
   openGraph: {
     type: 'website',
     locale: 'ko_KR',

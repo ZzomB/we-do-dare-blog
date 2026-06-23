@@ -2,10 +2,24 @@ import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/ca
 import { Separator } from '@radix-ui/react-separator';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
+
 interface DocsPageProps {
   params: Promise<{
     slug: string[];
   }>;
+}
+
+export async function generateMetadata({ params }: DocsPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const path = slug ? slug.join('/') : '';
+  const canonicalPath = path ? `/blog/docs/${path}` : '/blog/docs';
+  return {
+    title: slug ? `${slug[slug.length - 1]} | 문서` : '문서 메인',
+    alternates: {
+      canonical: canonicalPath,
+    },
+  };
 }
 
 export default async function DocsPage({ params }: DocsPageProps) {

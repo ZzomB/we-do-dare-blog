@@ -1,3 +1,12 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '프로필',
+  alternates: {
+    canonical: '/blog/about/profile',
+  },
+};
+
 export default function Aboutprofile() {
   return (
     <div className="container py-8">
