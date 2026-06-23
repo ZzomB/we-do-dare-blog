@@ -37,7 +37,7 @@ export async function generateMetadata({
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.wedodare.com';
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wedodare.com').replace(/\/$/, '');
   const postUrl = `${baseUrl}/blog/${slug}`;
   const description = post.description || `${post.title} - WeDoDare`;
 
@@ -154,7 +154,7 @@ export default async function BlogPost({ params }: BlogPostProps) {
   }
 
   // 구조화된 데이터 (Schema.org JSON-LD)
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://blog.wedodare.com';
+  const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wedodare.com').replace(/\/$/, '');
   const postUrl = `${baseUrl}/blog/${slug}`;
   const structuredData = {
     '@context': 'https://schema.org',
