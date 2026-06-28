@@ -17,6 +17,7 @@ import withSlugs from 'rehype-slug';
 import withToc from '@stefanprobst/rehype-extract-toc';
 import withTocExport from '@stefanprobst/rehype-extract-toc/mdx';
 import GiscusComments from '@/components/GiscusComments';
+import ShareButton from '@/components/ShareButton';
 import TableOfContents from '@/components/TableOfContents';
 import RemoveUserContentPrefix from '@/components/RemoveUserContentPrefix';
 import { notFound } from 'next/navigation';
@@ -310,6 +311,10 @@ export default async function BlogPost({ params }: BlogPostProps) {
               </div>
 
               <Separator className="my-16" />
+
+              <div className="flex justify-center mb-12">
+                <ShareButton />
+              </div>
 
               {/* 이전/다음 포스트 네비게이션 */}
               <GiscusComments />
