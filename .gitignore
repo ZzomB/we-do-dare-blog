@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Wedodare platform specs
+/wedodare_system_spec.md
+/wedodare_multi_project_coordination_plan.md
