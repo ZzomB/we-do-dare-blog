@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import { Instagram, Mail, Youtube } from 'lucide-react';
 
@@ -7,9 +8,22 @@ export default function Header() {
     <header className="bg-background sticky top-0 z-50 border-b">
       <div className="container flex h-[var(--header-height)] items-center px-4">
         <div className="flex w-full items-center justify-between">
-          <div className="flex items-center justify-start">
-            <Link href="/" className="text-xl font-semibold">
-              <span className="font-bold">WeDoDare</span>
+          <div className="flex items-center justify-start gap-3">
+            <a 
+              href="https://www.wedodare.com" 
+              className="flex items-center transition-transform hover:scale-105 duration-200"
+              title="WeDoDare 메인 홈페이지로 이동"
+            >
+              <Image 
+                src="/blog/logo-light.png" 
+                alt="WeDoDare Logo" 
+                width={28} 
+                height={28} 
+                className="rounded-md object-contain transition-all duration-300 filter dark:invert"
+              />
+            </a>
+            <Link href="/" className="text-xl font-semibold hover:text-primary transition-colors">
+              <span className="font-bold">WeDoDare Blog</span>
             </Link>
           </div>
           <div className="flex items-center justify-end gap-4">
