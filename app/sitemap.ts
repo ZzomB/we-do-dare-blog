@@ -22,39 +22,57 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 마지막 슬래시 제거
   const cleanBaseUrl = baseUrl.replace(/\/$/, '');
 
+  // 블로그 게시물 가져오기 (에러 처리 추가)
+  let blogPosts: MetadataRoute.Sitemap = [];
+  let latestPostDate: Date | undefined = undefined;
+
+  try {
+    const { posts } = await getPublishedPosts({ pageSize: 100 });
+
+    // 전체 포스트 중 가장 최근 수정/발행일 찾기
+    if (posts.length > 0) {
+      const dates = posts
+        .map((p) => {
+          const dateStr = p.modifiedDate || p.date;
+          return dateStr ? new Date(dateStr) : null;
+        })
+        .filter((d): d is Date => d !== null && !isNaN(d.getTime()));
+      if (dates.length > 0) {
+        latestPostDate = new Date(Math.max(...dates.map((d) => d.getTime())));
+      }
+    }
+
+    // 블로그 게시물 URL 생성
+    blogPosts = posts.map((post) => {
+      const postDateStr = post.modifiedDate || post.date;
+      const postDate = postDateStr ? new Date(postDateStr) : undefined;
+
+      return {
+        url: `${cleanBaseUrl}/blog/${post.slug}`,
+        ...(postDate && !isNaN(postDate.getTime()) && { lastModified: postDate }),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      };
+    });
+  } catch (error) {
+    // Notion API 호출 실패 시에도 정적 페이지는 반환
+    console.error('블로그 게시물을 가져오는 중 오류 발생:', error);
+  }
+
   // 정적 페이지 목록
   const staticPages = [
     {
       url: `${cleanBaseUrl}/blog`,
-      lastModified: new Date(),
+      ...(latestPostDate && { lastModified: latestPostDate }),
       changeFrequency: 'daily' as const,
       priority: 1.0,
     },
     {
       url: `${cleanBaseUrl}/blog/about`,
-      lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
     },
   ];
-
-  // 블로그 게시물 가져오기 (에러 처리 추가)
-  let blogPosts: MetadataRoute.Sitemap = [];
-
-  try {
-    const { posts } = await getPublishedPosts({ pageSize: 100 });
-
-    // 블로그 게시물 URL 생성
-    blogPosts = posts.map((post) => ({
-      url: `${cleanBaseUrl}/blog/${post.slug}`,
-      lastModified: post.modifiedDate ? new Date(post.modifiedDate) : new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
-  } catch (error) {
-    // Notion API 호출 실패 시에도 정적 페이지는 반환
-    console.error('블로그 게시물을 가져오는 중 오류 발생:', error);
-  }
 
   // 정적 페이지와 블로그 게시물 결합
   return [...staticPages, ...blogPosts];
