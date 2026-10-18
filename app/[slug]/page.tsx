@@ -22,6 +22,9 @@ import TableOfContents from '@/components/TableOfContents';
 import RemoveUserContentPrefix from '@/components/RemoveUserContentPrefix';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
+import PostNavigation from '@/components/features/blog/PostNavigation';
+import PostNavigationSkeleton from '@/components/features/blog/PostNavigationSkeleton';
 
 export async function generateMetadata({
   params,
@@ -38,6 +41,7 @@ export async function generateMetadata({
     };
   }
 
+  const isNoIndex = post.tags?.includes('noindex') || false;
   const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.wedodare.com').replace(/\/$/, '');
   const postUrl = `${baseUrl}/blog/${slug}`;
   const description = post.description || `${post.title} - WeDoDare`;
@@ -92,11 +96,11 @@ export async function generateMetadata({
       images: [ogImageUrl],
     },
     robots: {
-      index: true,
-      follow: true,
+      index: !isNoIndex,
+      follow: !isNoIndex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: !isNoIndex,
+        follow: !isNoIndex,
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,
@@ -117,7 +121,7 @@ export const generateStaticParams = async () => {
   return posts.map((post) => ({ slug: post.slug }));
 };
 
-export const revalidate = 60; // 1분마다 캐시 재검증
+export const revalidate = 3600; // 1시간마다 캐시 재검증 (초 단위)
 
 interface BlogPostProps {
   params: Promise<{ slug: string }>;
@@ -310,14 +314,15 @@ export default async function BlogPost({ params }: BlogPostProps) {
                 />
               </div>
 
-              <Separator className="my-16" />
+              {/* 이전/다음 포스트 네비게이션 및 공유 버튼 (부분적 Suspense) */}
+              <Suspense fallback={<PostNavigationSkeleton />}>
+                <PostNavigation currentSlug={slug} />
+              </Suspense>
 
-              <div className="flex justify-center mb-12">
-                <ShareButton />
-              </div>
-
-              {/* 이전/다음 포스트 네비게이션 */}
-              <GiscusComments />
+              {/* 댓글 시스템 (부분적 Suspense) */}
+              <Suspense fallback={<div className="h-32 animate-pulse bg-muted/30 rounded-lg" />}>
+                <GiscusComments />
+              </Suspense>
             </section>
             <aside className="relative hidden md:block">
               <div className="sticky top-(--sticky-top)">

@@ -154,13 +154,29 @@ export const getPublishedPosts = unstable_cache(
                     contains: tag,
                   },
                 },
+                {
+                  property: 'Tags',
+                  multi_select: {
+                    does_not_contain: 'noindex',
+                  },
+                },
               ],
             }
           : {
-              property: 'Status',
-              select: {
-                equals: 'Published',
-              },
+              and: [
+                {
+                  property: 'Status',
+                  select: {
+                    equals: 'Published',
+                  },
+                },
+                {
+                  property: 'Tags',
+                  multi_select: {
+                    does_not_contain: 'noindex',
+                  },
+                },
+              ],
             },
       sorts: [
         {
