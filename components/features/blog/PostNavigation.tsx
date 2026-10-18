@@ -36,7 +36,7 @@ export default async function PostNavigation({ currentSlug }: PostNavigationProp
               className="group inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors max-w-full"
               title={`이전 글: ${prevPost.title}`}
             >
-              <span className="shrink-0 font-medium transition-transform group-hover:-translate-x-1">
+              <span className="shrink-0 font-medium">
                 &lt;
               </span>
               <span className="truncate">{prevPost.title}</span>
@@ -62,7 +62,7 @@ export default async function PostNavigation({ currentSlug }: PostNavigationProp
               title={`다음 글: ${nextPost.title}`}
             >
               <span className="truncate">{nextPost.title}</span>
-              <span className="shrink-0 font-medium transition-transform group-hover:translate-x-1">
+              <span className="shrink-0 font-medium">
                 &gt;
               </span>
             </Link>
